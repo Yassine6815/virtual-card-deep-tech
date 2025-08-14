@@ -29,7 +29,7 @@
 	}
 
 	if (whatsappLink) {
-		whatsappLink.href = `https://wa.me/+213666498480?text=${encode(contacts.whatsappText)}`;
+		whatsappLink.href = `https://wa.me/0666498480?text=${encode(contacts.whatsappText)}`;
 		whatsappLink.setAttribute('rel','noopener noreferrer');
 	}
 
