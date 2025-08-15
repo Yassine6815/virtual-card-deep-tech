@@ -36,6 +36,7 @@
 		} else {
 			whatsappLink.href = `https://wa.me/?text=${encode(contacts.whatsappText)}`;
 		}
+
 		whatsappLink.setAttribute('rel','noopener noreferrer');
 	}
 
