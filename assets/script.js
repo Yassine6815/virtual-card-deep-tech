@@ -1,18 +1,12 @@
-// Script to wire contact links and status badge
-(function() {
-	const emailLink = document.getElementById('emailLink');
-	const whatsappLink = document.getElementById('whatsappLink');
-	const facebookLink = document.getElementById('facebookLink');
-	const phoneLink = document.getElementById('phoneLink');
-	const openBadge = document.getElementById('openBadge');
-
-// Clean, single-file script to wire contact links and the open/closed badge.
+// Script to wire contact links, maps link, and status badge
 (function(){
 	'use strict';
 
 	const emailLink = document.getElementById('emailLink');
 	const whatsappLink = document.getElementById('whatsappLink');
 	const facebookLink = document.getElementById('facebookLink');
+	const phoneLink = document.getElementById('phoneLink');
+	const mapsLink = document.getElementById('mapsLink');
 	const openBadge = document.getElementById('openBadge');
 
 	// Default contact values — change these from HTML or via the exposed API
@@ -35,7 +29,7 @@
 	}
 
 	if (whatsappLink) {
-			whatsappLink.href = `https://wa.me/+213666498480?text=${encode(contacts.whatsappText)}`;
+		whatsappLink.href = `https://wa.me/?text=${encode(contacts.whatsappText)}`;
 		whatsappLink.setAttribute('rel','noopener noreferrer');
 	}
 
@@ -46,6 +40,13 @@
 			const span = phoneLink.querySelector('span');
 			if (span) span.textContent = contacts.phoneDisplay || contacts.phone;
 		}
+
+	// Maps link (static URL from author)
+	if (mapsLink) {
+		mapsLink.href = 'https://maps.app.goo.gl/aaJ1qNazQYAXY1aC8?g_st=aw';
+		mapsLink.setAttribute('target','_blank');
+		mapsLink.setAttribute('rel','noopener noreferrer');
+	}
 
 	if (facebookLink) {
 		facebookLink.href = contacts.facebookUrl;
@@ -72,18 +73,17 @@
 	window.deepTech.updateContacts = function(newContacts){
 		Object.assign(contacts, newContacts || {});
 		if (emailLink) emailLink.href = `mailto:${contacts.email}?subject=${encode(contacts.emailSubject)}&body=${encode(contacts.emailBody)}`;
-			if (whatsappLink) whatsappLink.href = `https://wa.me/?text=${encode(contacts.whatsappText)}`;
-			if (facebookLink) facebookLink.href = contacts.facebookUrl;
-			if (phoneLink) {
-				phoneLink.href = `tel:${contacts.phone}`;
-				const span = phoneLink.querySelector('span');
-				if (span) span.textContent = contacts.phoneDisplay || contacts.phone;
-			}
+		if (whatsappLink) whatsappLink.href = `https://wa.me/?text=${encode(contacts.whatsappText)}`;
+		if (facebookLink) facebookLink.href = contacts.facebookUrl;
+		if (phoneLink) {
+			phoneLink.href = `tel:${contacts.phone}`;
+			const span = phoneLink.querySelector('span');
+			if (span) span.textContent = contacts.phoneDisplay || contacts.phone;
+		}
 	};
-
 	// Default initialization: if page author didn't set data-open, assume open
 	if (!document.body.hasAttribute('data-open')) document.body.setAttribute('data-open','true');
 	renderStatus();
 
-})()})();
+})();
 
