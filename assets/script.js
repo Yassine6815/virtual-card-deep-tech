@@ -29,7 +29,13 @@
 	}
 
 	if (whatsappLink) {
-		whatsappLink.href = `https://wa.me/+213666498480?text=${encode(contacts.whatsappText)}`;
+		// Normalize phone to digits only (wa.me requires country code without + or spaces)
+		const waPhone = (contacts.phone || '').replace(/[^0-9]/g, '');
+		if (waPhone) {
+			whatsappLink.href = `https://wa.me/${waPhone}?text=${encode(contacts.whatsappText)}`;
+		} else {
+			whatsappLink.href = `https://wa.me/?text=${encode(contacts.whatsappText)}`;
+		}
 		whatsappLink.setAttribute('rel','noopener noreferrer');
 	}
 
@@ -73,7 +79,10 @@
 	window.deepTech.updateContacts = function(newContacts){
 		Object.assign(contacts, newContacts || {});
 		if (emailLink) emailLink.href = `mailto:${contacts.email}?subject=${encode(contacts.emailSubject)}&body=${encode(contacts.emailBody)}`;
-		if (whatsappLink) whatsappLink.href = `https://wa.me/+213666498480?text=${encode(contacts.whatsappText)}`;
+		if (whatsappLink) {
+			const waPhone = (contacts.phone || '').replace(/[^0-9]/g, '');
+			whatsappLink.href = waPhone ? `https://wa.me/${waPhone}?text=${encode(contacts.whatsappText)}` : `https://wa.me/?text=${encode(contacts.whatsappText)}`;
+		}
 		if (facebookLink) facebookLink.href = contacts.facebookUrl;
 		if (phoneLink) {
 			phoneLink.href = `tel:${contacts.phone}`;
