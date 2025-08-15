@@ -1,0 +1,114 @@
+:root{
+  --blue:#0b71ff;
+  --light-blue:#7ec8ff;
+  --white:#ffffff;
+  --yellow:#ffd200;
+  --card-bg: linear-gradient(180deg, rgba(11,113,255,0.06), rgba(126,200,255,0.02));
+  --glass: rgba(255,255,255,0.6);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg, #eaf6ff 0%, #ffffff 100%);
+  color:#07324a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+
+/* Arabic support: use Tajawal for Arabic text and enforce RTL for elements marked with lang="ar" */
+:lang(ar){
+  font-family: 'Tajawal', 'Noto Naskh Arabic', system-ui, sans-serif;
+}
+
+[lang="ar"]{direction:rtl}
+.card{
+  width:100%;
+  margin: auto;
+  max-width:420px;
+  background:var(--card-bg);
+  border-radius:16px;
+  box-shadow:0 8px 30px rgba(7,50,74,0.08);
+  overflow:hidden;
+  border:1px solid rgba(11,113,255,0.08);
+}
+.card-header{padding:22px 20px 10px;text-align:center}
+.logo-wrap{display:flex;align-items:center;justify-content:center}
+/* Circular avatar for the logo, similar to profile pictures */
+.logo-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.logo-wrap .logo-avatar,
+.logo-wrap img#logo{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  overflow:hidden;
+  display:block;
+  background:var(--white);
+  box-shadow:0 6px 18px rgba(7,50,74,0.08);
+  border:1px solid rgba(11,113,255,0.06);
+}
+.logo-wrap img#logo{
+  object-fit:cover; /* fill the circle like a profile pic */
+  aspect-ratio: 1 / 1;
+  display:block;
+}
+
+@media(min-width:520px){
+  .logo-wrap img#logo{width:88px;height:88px}
+}
+.brand{margin:10px 0 0;font-weight:700;letter-spacing:0.2px}
+.brand-primary{color:#072b52;font-size:20px}
+.brand-accent{color:var(--yellow);font-size:20px}
+.tagline{margin:6px 0 0;color:#28526f;font-size:20px;font-weight: bold;}
+
+.status-row{display:flex;flex-direction: column; gap:10px;align-items:center;justify-content:center;padding:12px 16px}
+.badge{padding:6px 12px;border-radius:999px;font-weight:600;font-size:13px}
+.badge-open{background:var(--blue);color:white}
+.badge-closed{background:#f1f5f9;color:#334155}
+.hours{font-size:13px;color:#1b557f}
+
+.card-body{padding:14px 20px 22px}
+.intro{margin:0 0 12px;color:#114b6b; text-align: center;}
+
+.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.action{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:white;border-radius:12px;padding:14px 8px;text-decoration:none;color:var(--blue);
+  box-shadow:0 6px 18px rgba(11,113,255,0.06);transition:transform .15s ease, box-shadow .15s ease;
+}
+.action:active,.action:focus,.action:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(11,113,255,0.09)}
+.action .icon{width:28px;height:28px;margin-bottom:8px;color:var(--blue);font-size:20px;line-height:28px;text-align:center}
+.action span{font-weight:600;font-size:13px}
+
+/* Icon images inside action tiles */
+.action img.icon{
+  width:28px;
+  height:28px;
+  object-fit:contain;
+  margin-bottom:8px;
+  display:block;
+}
+
+/* If SVGs don't load, hide the broken image but keep text visible */
+.action img.icon[style*="opacity=0"]{display:none}
+
+.card-footer{padding:12px 16px 20px;text-align:center}
+.note{color:#54798f;font-size:12px}
+
+/* Mobile adjustments */
+@media(min-width:520px){
+  .actions{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Make brand use a slightly more modern weight / yellow accent */
+.brand-accent{font-weight:700}
+
+/* small accessibility helpers */
+action:focus{outline:3px solid rgba(11,113,255,0.12);outline-offset:3px}
