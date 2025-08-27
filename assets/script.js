@@ -8,6 +8,7 @@
 	const phoneLink = document.getElementById('phoneLink');
 	const mapsLink = document.getElementById('mapsLink');
 	const openBadge = document.getElementById('openBadge');
+	const instagram = document.getElementById('instagram');
 
 	// Default contact values — change these from HTML or via the exposed API
 	const contacts = {
@@ -17,7 +18,8 @@
 		whatsappText: 'السلام عليكم',
 		facebookUrl: 'https://www.facebook.com/deeptech333',
 		phone: '+213666498480', // normalized tel value
-		phoneDisplay: 'Call | إتصل' // human-friendly display
+		phoneDisplay: 'Call | إتصل', // human-friendly display
+		instagram: 'https://www.instagram.com/deeptech333',
 	};
 
 	function encode(s){ return encodeURIComponent(s); }
@@ -53,6 +55,12 @@
 		mapsLink.href = 'https://maps.app.goo.gl/aaJ1qNazQYAXY1aC8?g_st=aw';
 		mapsLink.setAttribute('target','_blank');
 		mapsLink.setAttribute('rel','noopener noreferrer');
+	}
+
+	if(instagram){
+		instagram.href = contacts.instagram;
+		instagram.setAttribute('target','_blank');
+		instagram.setAttribute('rel','noopener noreferrer');
 	}
 
 	if (facebookLink) {
